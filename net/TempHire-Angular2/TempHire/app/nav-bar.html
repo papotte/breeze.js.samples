@@ -1,0 +1,18 @@
+﻿<nav class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <a class="brand" routerLink="/">
+            <span class="title">TempHire Breeze</span>
+        </a>
+        <div class="btn-group">
+            <a *ngFor="let route of routes" [routerLink]="route.routerLink" routerLinkActive="active" class="btn btn-info">{{ route.title }}</a>
+            <a class="btn btn-info" (click)="logout()">Logout</a>
+        </div>
+
+
+        <div class="loader progress pull-right" style="width: 100px; margin-top: 15px" [ngClass]="{ 'active': busyService.isBusy }">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%">
+                Wait...
+            </div>
+        </div>
+    </div>
+</nav>

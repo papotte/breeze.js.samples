@@ -1,0 +1,87 @@
+﻿<section>
+    <div class="addresses">
+        <h3>Addresses:</h3>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-plus" aria-hidden="true"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li *ngFor="let addressType of addressTypes">
+                    <a (click)="addAddress(addressType)">
+                        <i class="fa" style="width: 20px; text-align: center" [ngClass]="{ 'fa-envelope-o': addressType.name == 'Mailing', 'fa-building-o': addressType.name == 'Work', 'fa-home': addressType.name == 'Home' }"
+                           aria-hidden="true">
+                        </i>
+                        {{ addressType.displayName }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div style="display: inline-block" *ngFor="let address of model.addresses">
+                <div class="address">
+                    <section>
+                        <h3>{{ address.addressType.name }}</h3>
+                    </section>
+                    <div class="formfieldwithlabel">
+                        <label>Address 1: </label>
+                        <input class="right" type="text" [(ngModel)]="address.address1" />
+                    </div>
+                    <div class="formfieldwithlabel">
+                        <label>Address 2:</label>
+                        <input class="right" type="text" [(ngModel)]="address.address2" />
+                    </div>
+                    <div class="formfieldwithlabel">
+                        <label>City:</label>
+                        <input class="right" type="text" [(ngModel)]="address.city" />
+                    </div>
+                    <div class="formfieldwithlabel">
+                        <label>State:</label>
+                        <select class="right" [(ngModel)]="address.stateId">
+                            <option *ngFor="let state of states" [ngValue]="state.id">{{ state.name }}</option>
+                        </select>
+                    </div>
+                    <div class="formfieldwithlabel">
+                        <label>Zipcode:</label>
+                        <input class="right" [(ngModel)]="address.zipcode"/>
+                    </div>
+                </div>
+                <div class="btn-group-vertical" style="margin-top:30px">
+                    <button class="btn btn-default" title="Set Primary..." [disabled]="address.primary" (click)="setPrimaryAddress(address)"><i class="fa fa-thumb-tack" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger" title="Delete..." style="margin-top:10px" [disabled]="address.primary || model.addresses.length === 1"  (click)="deleteAddress(address)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="phonenumbers">
+        <h3>Phone Numbers:</h3>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-plus" aria-hidden="true"></i> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li *ngFor="let phoneNumberType of phoneNumberTypes">
+                    <a (click)="addPhoneNumber(phoneNumberType)">
+                        <i class="fa" style="width: 20px; text-align: center" [ngClass]="{ 'fa-mobile': phoneNumberType.name == 'Mobile', 'fa-building-o': phoneNumberType.name == 'Work', 'fa-home': phoneNumberType.name == 'Home' }"
+                           aria-hidden="true">
+                        </i>
+                        {{ phoneNumberType.name + ' Phone' }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="phonenumber" *ngFor="let phoneNumber of model.phoneNumbers">
+                <section>
+                    <label>{{ phoneNumber.phoneNumberType.name + ':' }}</label>
+                </section>
+                <div class="btn-group right" style="margin-left: 10px;margin-top: 3px">
+                    <button class="btn btn-default" title="Set Primary..." [disabled]="phoneNumber.primary" (click)="setPrimaryPhoneNumber(phoneNumber)"><i class="fa fa-thumb-tack" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger" title="Delete..." style="margin-left: 5px" [disabled]="phoneNumber.primary || model.phoneNumbers.length === 1" (click)="deletePhoneNumber(phoneNumber)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </div>
+                <input type="text" class="right" [(ngModel)]="phoneNumber.number" style="width: 100px" />
+                <input type="text" class="right" [(ngModel)]="phoneNumber.areaCode" style="width: 30px" />
+            </div>
+        </div>
+    </div>
+</section>
+
