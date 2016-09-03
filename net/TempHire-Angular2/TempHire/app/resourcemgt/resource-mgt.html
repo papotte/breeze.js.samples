@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr [ngClass]="{ 'info': staffingResource.id == reportId }" *ngFor="let staffingResource of staffingResources" (click)="onSelect(staffingResource)">
+                <tr [ngClass]="{ 'info': staffingResource.id == staffingResourceId }" *ngFor="let staffingResource of staffingResources" (click)="onSelect(staffingResource)">
                     <td>{{ staffingResource.fullName }}</td>
                     <td>{{ staffingResource.address1 }}</td>
                     <td>{{ staffingResource.address2 }}</td>

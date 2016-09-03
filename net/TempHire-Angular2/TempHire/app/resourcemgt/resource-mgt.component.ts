@@ -11,7 +11,7 @@ import { BusyService } from '../core/services/common';
 export class ResourceMgtComponent implements OnInit, OnDestroy {
 
     staffingResources: StaffingResourceListItem[];
-    reportId: string;
+    staffingResourceId: string;
 
     private unsubscribeFromEvents: () => void;
 
@@ -20,7 +20,7 @@ export class ResourceMgtComponent implements OnInit, OnDestroy {
     ngOnInit() {
         if (this.route.firstChild) {
             this.route.firstChild.params.forEach(params => {
-                this.reportId = params['id'];
+                this.staffingResourceId = params['id'];
             });
         }
 
@@ -46,7 +46,7 @@ export class ResourceMgtComponent implements OnInit, OnDestroy {
         return this.busyService.busy(this.unitOfWork.staffingResourceListItems.all()
             .then(data => {
                 this.staffingResources = data;
-                if (!this.reportId && data.length > 0) {
+                if (!this.staffingResourceId && data.length > 0) {
                     this.router.navigate(['/resourcemgt', data[0].id]);
                 }
                 return data;
