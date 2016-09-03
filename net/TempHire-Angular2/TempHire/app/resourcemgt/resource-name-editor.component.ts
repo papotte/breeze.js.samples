@@ -1,6 +1,6 @@
 ﻿import { Component, Input, ElementRef } from '@angular/core';
 
-import { ModalDialog, showModal, returnModal } from '../shared/controls/modal-dialog';
+import { ModalDialog } from '../shared/controls/modal-dialog';
 
 import { StaffingResource } from '../core/entities/entity-model';
 
@@ -32,7 +32,7 @@ export class ResourceNameEditorComponent extends ModalDialog<Name> {
             lastName: this.model.lastName
         };
 
-        return showModal(this, parent);
+        return this.showModal(parent);
     }
 
     get canOk(): boolean {
@@ -40,10 +40,10 @@ export class ResourceNameEditorComponent extends ModalDialog<Name> {
     }
 
     ok() {
-        returnModal(this, this.name);
+        this.returnModal(this.name);
     }
 
     cancel() {
-        returnModal(this, null);
+        this.returnModal(null);
     }
 }
